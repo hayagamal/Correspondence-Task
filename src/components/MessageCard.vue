@@ -3,55 +3,19 @@
 
     <v-app id="inspire">
   <h1  >Inbox</h1>
-      <!-- <div  class="text-left" >
-        <Send @setParentComponentDetails="setDetailsForComponent" />
-      </div> -->
-      <!-- <v-system-bar>
-          <v-spacer></v-spacer>
-    
-          <v-icon>mdi-square</v-icon>
-    
-          <v-icon>mdi-circle</v-icon>
-    
-          <v-icon>mdi-triangle</v-icon>
-        </v-system-bar> -->
-  
-      <!-- <v-navigation-drawer v-model="drawer">
-          <v-sheet
-            color="grey-lighten-4"
-            class="pa-4"
-          >
-            <v-avatar
-              class="mb-4"
-              color="grey-darken-1"
-              size="64"
-            ></v-avatar> -->
-  
-      <!-- <div>john@google.com</div>
-          </v-sheet>
-    
-          <v-divider></v-divider>
-    
-          <v-list>
-            <v-list-item
-              v-for="[icon, text] in links"
-              :key="icon"
-              link
-            >
-              <template v-slot:prepend>
-                <v-icon>{{ icon }}</v-icon>
-              </template>
-    
-              <v-list-item-title>{{ text }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-navigation-drawer> -->
-  
+     
       <v-main class="px-6 py-1 container">
         <v-container fluid >
-          <v-row >
-            <v-col v-for="card in cards" :key="card" >
-              <v-card width="">
+                <template>
+                <v-data-table
+                    :items-per-page="itemsPerPage"
+                    :headers="headers"
+                    :items="items"
+                    class="elevation-1"
+                ></v-data-table>
+                </template>
+
+              <!-- <v-card width="">
   
                 <v-list>
                   <v-list-subheader>{{ now }}</v-list-subheader>
@@ -68,15 +32,14 @@
                       </v-list-item-subtitle>
                     </v-list-item>
   
-                    <!-- <v-divider v-if="n !== 6" :key="`divider-${n}`" inset></v-divider> -->
-                  </template>
+                    <v-divider v-if="n !== 6" :key="`divider-${n}`" inset></v-divider> -->
+                  <!-- </template>
                 </v-list>
-              </v-card>
-            </v-col>
-          </v-row>
-           <FooterComp/>
+              </v-card> -->
+
         </v-container>
       </v-main>
+      <FooterComp/>
     </v-app>
   </template>
   
@@ -94,14 +57,25 @@
   
     data (){
       return {
-      now : new Date(),
-      messege:"",
-      messeges:[
-      {  from: "Reem",
-         text:"Hello",},],
-      
+      now : new Date(),      
       cards: ['Today'],
       drawer: null,
+      itemsPerPage:5,
+      headers: [
+          {
+            text: 'From',
+            align: 'start',
+            sortable: false,
+            value: 'from',
+          },
+          { text: 'Message', value: 'message' },
+        ],
+        items: [
+          {
+            from: 'x',
+            message: 'y'
+          },
+        ],
     };
     },
     methods: {  
