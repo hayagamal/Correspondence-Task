@@ -63,9 +63,10 @@ li{
 .login-btn{
     text-decoration: none;
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
+    padding-left: 25px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    justify-content: left;
     margin-top: 40px;
 }
 

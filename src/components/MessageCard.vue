@@ -72,8 +72,8 @@
         ],
         items: [
           {
-            from: 'x',
-            message: 'y'
+            from: 'Reem',
+            message: 'مساء الأنوار'
           },
         ],
     };
