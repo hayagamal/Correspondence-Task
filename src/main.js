@@ -8,6 +8,9 @@ import LoginPage from './views/LoginPage'
 import vuetify from './plugins/vuetify'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
+import MessageCard from './components/MessageCard';
+
+
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 const routes = [
@@ -15,7 +18,9 @@ const routes = [
   {path: '/correspondence', component: NewCorrespondence},
   {path: '/attachment', component : AddAttachment},
   {path: '/login', component: LoginPage},
-  {path: '/new', component: SendNewCorr}
+  {path: '/new', component: SendNewCorr},
+  {path: '/', component: MessageCard}
+
 
 
 ]

@@ -2,6 +2,7 @@
  <v-sheet width="400" class="mx-auto form">
     <v-form ref='form' validate-on="submit" @submit.prevent="submit">
       <v-text-field
+      
         v-model="correspondence.reciever"
         label="To"
         :rules="inputRules"
@@ -42,6 +43,7 @@ export default {
 
   data() {
     return {
+      // isdisabled:true,
       correspondence: {
         reciever: '',
       subject: '',

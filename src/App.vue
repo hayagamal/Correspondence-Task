@@ -2,6 +2,7 @@
   <v-app>
     <v-main>
       <SideNavBar/>
+    
       
       <router-view></router-view>
     </v-main>
@@ -13,11 +14,13 @@
 import SideNavBar from '@/components/SideNavBar.vue';
 
 
+
 export default {
   name: 'App',
 
   components: {
     SideNavBar,
+   
   
   },
 
