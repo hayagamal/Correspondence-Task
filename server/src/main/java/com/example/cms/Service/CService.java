@@ -58,13 +58,7 @@ public class CService {
     }
    
     public boolean addCorrespondence(Correspondence correspondence){
-        cmsRepository.save(new Correspondence(correspondence.getSubject(),
-                                            correspondence.getDescription(),
-                                            correspondence.getType(),
-                                            correspondence.getPriority(),
-                                            correspondence.getAttachmentID(),
-                                            correspondence.getFrom_id(),
-                                            correspondence.getReferance_id()));
+        cmsRepository.save(correspondence);
         return true;
     }
     

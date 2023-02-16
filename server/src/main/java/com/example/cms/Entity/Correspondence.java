@@ -19,12 +19,11 @@ public class Correspondence {
     private String Subject;
     private String Description;
     private Date date;
-    private Type Type; // request, response
     private Priority Priority;// High, Medium, Low
     private long AttachmentID;
     private long from_id;
     private long referance_id;
-
+    private String toText;
     private String fromText;
 
 
@@ -37,7 +36,9 @@ public class Correspondence {
     private Person referance;
 
  
-    @OneToMany(mappedBy = "correspondence") private List<Reply> correspondeanceMessage;
+    @OneToMany(mappedBy = "correspondence") 
+    @JsonIgnore
+    private List<Reply> correspondeanceMessage;
     
     public Correspondence() {
     }
@@ -47,7 +48,6 @@ public class Correspondence {
     public Correspondence(
                         String Subject, 
                         String Description, 
-                        Type Type, 
                         Priority Priority, 
                         long AttachmentID, 
                         long from_id, 
@@ -55,7 +55,6 @@ public class Correspondence {
         this.Subject = Subject;
         this.Description = Description;
         this.date = Date.from(ZonedDateTime.now().toInstant());
-        this.Type = Type;
         this.Priority = Priority;
         this.AttachmentID = AttachmentID;
         this.from_id = from_id;
@@ -63,17 +62,34 @@ public class Correspondence {
     }
     public Correspondence(String Subject, 
                         String Description, 
-                        Type Type, 
                         Priority Priority, 
                         long from_id, 
                         long referance_id) {
         this.Subject = Subject;
         this.Description = Description;
         this.date = Date.from(ZonedDateTime.now().toInstant());
-        this.Type = Type;
         this.Priority = Priority;
         this.from_id = from_id;
         this.referance_id = referance_id;
+    }
+
+    public Correspondence(String Subject, 
+                        String Description, 
+                        Priority Priority, 
+                        long AttachmentID, 
+                        long from_id, 
+                        long referance_id,
+                        String toTexString,
+                        String FromText) {
+        this.Subject = Subject;
+        this.Description = Description;
+        this.date = Date.from(ZonedDateTime.now().toInstant());
+        this.Priority = Priority;
+        this.AttachmentID = AttachmentID;
+        this.from_id = from_id;
+        this.referance_id = referance_id;
+        this.toText=toTexString;
+        this.fromText= FromText;
     }
 
     public long getID() {
@@ -110,14 +126,6 @@ public class Correspondence {
         this.AttachmentID = AttachmentID;
     }
     
-
-    public Type getType() {
-        return this.Type;
-    }
-
-    public void setType(Type Type) {
-        this.Type = Type;
-    }
 
     public Priority getPriority() {
         return this.Priority;
@@ -171,8 +179,24 @@ public class Correspondence {
         this.referance_id = referance_id;
     }
 
-    public void setFromText(Person referance) {
-            this.fromText = "1122";
+    public void setFromText(String referance) {
+            this.fromText = referance;
+    }
+
+    public String getToText() {
+        return this.toText;
+    }
+
+    public void setToText(String toText) {
+        this.toText = toText;
+    }
+
+    public List<Reply> getCorrespondeanceMessage() {
+        return this.correspondeanceMessage;
+    }
+
+    public void setCorrespondeanceMessage(List<Reply> correspondeanceMessage) {
+        this.correspondeanceMessage = correspondeanceMessage;
     }
 
     public String getFromText() {

@@ -21,7 +21,7 @@ import com.example.cms.DTO.CDTO;
 
 import com.example.cms.Service.CService;
 import com.example.cms.Service.PersonService;
-
+import com.example.cms.Service.ReplyService;
 import com.example.cms.Entity.*;
 @RestController
 public class CMSController {
@@ -29,7 +29,8 @@ public class CMSController {
     private PersonService personService;
     @Autowired
     private CService cService;
-
+    @Autowired
+    private  ReplyService replyService;
 
     @GetMapping("/addPerson")
     public boolean addPerson(){
@@ -55,13 +56,6 @@ public class CMSController {
         return cService.DownloadFile(id);
     }
 
-    // @CrossOrigin(origins = "*", maxAge = 3600)
-    // @PostMapping("/imagePost")
-    // public ResponseEntity<?>  uploadfile(@RequestParam("file") MultipartFile file) throws IOException{
-    
-    //        System.out.println(file);
-    //     return  new ResponseEntity<>(cService.uploadFileExtended(file), HttpStatus.OK);
-    // }
     @CrossOrigin(origins = "*", maxAge = 3600)
     @GetMapping("/outgoing/{name}")
     public ResponseEntity<?>  getSentMesssage(@PathVariable("name") String name) throws IOException{
@@ -79,9 +73,27 @@ public class CMSController {
         CDTO c = map.readValue(message, CDTO.class);
         long fromID = personService.getPerson(c.getFrom());
         long ToID   = personService.getPerson(c.getTo());
-        Correspondence correspondence = new Correspondence(c.getSubject(),c.getDescription(),c.getType(),c.getPriority(),fromID,ToID);
+        Correspondence correspondence = new Correspondence(c.getSubject(),c.getDescription(),c.getPriority(),fromID,ToID);
+        correspondence.setFromText(c.getFrom());
+        correspondence.setToText(c.getTo());
         long AttachmentID = cService.uploadFileExtended(file).getId();
         correspondence.setAttachmentID(AttachmentID);
         return  new ResponseEntity<>(cService.addCorrespondence(correspondence), HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @PostMapping("/reply")
+    public ResponseEntity<?>  replyToCorrespondence(@RequestParam("reply") String reply,@RequestParam("file") MultipartFile file) throws IOException{
+        ObjectMapper map = new ObjectMapper();
+        Reply replys = map.readValue(reply, Reply.class);
+        long AttachmentID = cService.uploadFileExtended(file).getId();
+        Reply postReply = new  Reply( replys.getMessage(), AttachmentID , replys.getCorrespondeance_id());
+        return new ResponseEntity<>(replyService.addReply(postReply), HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @GetMapping("/findReply/{id}")
+    public ResponseEntity<?>  getRecivedMesssage(@PathVariable("id") long id) throws IOException{
+        return new ResponseEntity<>(replyService.findByCorrespondenceId(id), HttpStatus.OK);
     }
 }

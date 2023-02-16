@@ -19,7 +19,7 @@ public class Reply {
 private long id;
 private String Message;
 private long AttachmentID;
-private long correspondeance_id;
+private long correspondence_id;
 private Date date;
 @ManyToOne @JoinColumn(name = "correspondence_id",referencedColumnName = "id", insertable = false ,updatable = false)
 @JsonIgnore private Correspondence correspondence;
@@ -34,7 +34,7 @@ private Date date;
     public Reply( String Message, long AttachmentID, long correspondeance_id) {
         this.Message = Message;
         this.AttachmentID = AttachmentID;
-        this.correspondeance_id = correspondeance_id;
+        this.correspondence_id = correspondeance_id;
         this.date = Date.from(ZonedDateTime.now().toInstant());
     }
 
@@ -64,11 +64,11 @@ private Date date;
     }
 
     public long getCorrespondeance_id() {
-        return this.correspondeance_id;
+        return this.correspondence_id;
     }
 
     public void setCorrespondeance_id(long correspondeance_id) {
-        this.correspondeance_id = correspondeance_id;
+        this.correspondence_id = correspondeance_id;
     }
 
     public long getAttachmentID() {

@@ -2,14 +2,12 @@ package com.example.cms.DTO;
 
 
 import com.example.cms.Entity.Enum.Priority;
-import com.example.cms.Entity.Enum.Type;
 import lombok.Data;
 
 @Data
 public class CDTO {
     private String Subject;
     private String Description;
-    private Type Type;
     private Priority Priority;
     private String from;
     private String to;
