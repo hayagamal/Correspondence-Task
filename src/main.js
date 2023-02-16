@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-//import SendNewCorr from './views/SendMessage/SendNewCorr.vue'
+import SendNewCorr from './views/SendMessage/SendNewCorr.vue'
 import AddAttachment from './views/SendMessage/AddAttachment.vue'
 import NewCorrespondence from './views/SendMessage/NewCorrespondence'
+import LoginPage from './views/LoginPage'
 import vuetify from './plugins/vuetify'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 const routes = [
-  
+ 
   {path: '/correspondence', component: NewCorrespondence},
-  {path: '/attachment', component : AddAttachment}
+  {path: '/attachment', component : AddAttachment},
+  {path: '/login', component: LoginPage},
+  {path: '/new', component: SendNewCorr}
 
 
 ]

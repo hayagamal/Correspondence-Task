@@ -57,7 +57,18 @@ methods: {
         this.tab +=1
     },
     uploadFile(attach){
+        console.log('a'+attach[0])
         this.attachment = attach;
+        var data = new FormData()
+        data.append('file',attach[0])
+        fetch('http://10.0.11.87:8888/imagePost',{
+            method: 'POST',
+            body: data,
+          
+
+        }).then((response)=> console.log(response)).catch((error)=> console.log(error))
+
+
         this.correspondenceAttached = {correspondence: this.correspondence , attachment: this.attachment}
         console.log(this.correspondenceAttached)
     }
