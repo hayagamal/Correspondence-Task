@@ -4,8 +4,12 @@ package com.example.cms.Controller;
 import java.io.IOException;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+import jakarta.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.example.cms.DTO.CDTO;
 
-import com.example.cms.Service.CService;
-import com.example.cms.Service.PersonService;
-import com.example.cms.Service.ReplyService;
+import com.example.cms.Service.*;
 import com.example.cms.Entity.*;
 @RestController
 public class CMSController {
@@ -32,12 +34,25 @@ public class CMSController {
     @Autowired
     private  ReplyService replyService;
 
+    @Autowired
+    private  authServer auth;
+
     @GetMapping("/addPerson")
     public boolean addPerson(){
         personService.addPerson(new Person("mohamed"));
         return personService.addPerson(new Person("ahmed"));
     }
 
+    @GetMapping("/testing")
+    public ResponseEntity<?> auth(HttpServletResponse response) throws JsonProcessingException {
+
+    return new ResponseEntity<>( auth.testing(), HttpStatus.OK);
+    }
+    @GetMapping("/usingXML")
+    public ResponseEntity<?> test(HttpServletResponse response) throws IOException {
+
+        return new ResponseEntity<>( auth.postXML(), HttpStatus.OK);
+    }
     @CrossOrigin(origins = "*", maxAge = 3600)
     @PostMapping("/addCorrespondence")
     public ResponseEntity<?> addTask(@RequestBody Correspondence correspondence) {
